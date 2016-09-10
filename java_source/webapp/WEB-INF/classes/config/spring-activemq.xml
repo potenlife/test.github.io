@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">  
+	    <property name="brokerURL" value="tcp://localhost:61616"/>  
+	    <!-- <property name="userName">admin</property>
+	    <property name="password">admin</property>  -->
+	</bean> 
+	
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">  
+	    <property name="connectionFactory" ref="targetConnectionFactory"/>  
+	    <property name="maxConnections" value="10"/>  
+	</bean> 
+	
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactory"/>
+	</bean> 
+	
+	<bean id="destination" class="com.cloud.poten.activemq.TopicDestination" />
+	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">  
+        <!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->  
+        <property name="connectionFactory" ref="connectionFactory"/>  
+    </bean> 
+    
+</beans>

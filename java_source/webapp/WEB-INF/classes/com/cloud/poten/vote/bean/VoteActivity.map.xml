@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>     
+<!DOCTYPE mapper     
+       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+    
+<mapper namespace="voteActivity">    
+	    
+    <!-- 查询 -->
+    <select id="getPageList" resultType="vote.VoteActivity" parameterType="vote.VoteActivity">
+    	<include refid="public.pageStart"/>
+    	SELECT id as "va_id" ,name as "va_name" ,start_time as "va_startTime" ,end_time as "va_endTime" ,order_type as "va_orderType" ,order_field as "va_orderField" ,vote_user_type as "va_voteUserType" ,vote_count as "va_voteCount" ,part_count as "va_partCount" ,gain_ticket_stat as "va_gainTicketStat" ,create_time as "va_createTime" ,create_user_id as "va_createUserId" 
+		FROM vote_activity 
+    	WHERE 1=1
+    	<include refid="pageWhere"/>
+    	<include refid="public.order"/>
+    	<include refid="public.pageEnd"/>
+	</select>
+    <select id="getPageListCount" resultType="int" parameterType="vote.VoteActivity">
+    	SELECT count(1) as pagecount FROM vote_activity WHERE 1=1
+    	<include refid="pageWhere"/>
+    </select>
+    <sql id="pageWhere">
+    	
+    </sql>
+    
+</mapper>  

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cloud>
+	<modules>
+		<module extends="0"  id="findVoteMgr"  loadType="AJAX">
+			<name>投票管理</name>
+			<icon>icon-globe</icon>
+			<sublist>
+			    <module id="findVoteActivity" >
+			        <name>投票活动列表</name>
+			        <url>vote/voteActivity_init.htm</url>
+				</module>
+			    <module id="findSiteUser2" >
+			        <name>投票页面列表</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			    <module id="findSiteUser3" >
+			        <name>参与者</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			    <module id="findSiteUser4" >
+			        <name>投票日志</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			</sublist>
+		</module>
+		
+		<module extends="0"  id="findAwardMgr"  loadType="AJAX">
+			<name>抽奖管理</name>
+			<icon>icon-globe</icon>
+			<sublist>
+			    <module id="findAwardList" >
+			        <name>抽奖活动列表</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			    <module id="findAwardList2" >
+			        <name>抽奖页面列表</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			    <module id="findAwardList3" >
+			        <name>参与者</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			    <module id="findAwardList4" >
+			        <name>奖品管理</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			    <module id="findAwardList5" >
+			        <name>抽奖日志</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			</sublist>
+		</module>
+		
+		<module extends="0"  id="findTempMgr"  loadType="AJAX">
+			<name>模版管理</name>
+			<icon>icon-globe</icon>
+			<sublist>
+			    <module id="findTempList" >
+			        <name>模版列表</name>
+			        <url>message/msgEmailInfo_init1.htm</url>
+				</module>
+			</sublist>
+		</module>
+	</modules>
+	
+	<privileges>
+	  
+	
+		<privilege id="addVoteActivity"  name="新增"  extends="findVoteActivity" />
+		<privilege id="updateVoteActivity"  name="修改"  extends="findVoteActivity" />
+		<privilege id="deleteVoteActivity"  name="删除"  extends="findVoteActivity" />
+		
+		
+		
+	</privileges>
+	
+</cloud>

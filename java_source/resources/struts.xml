@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="base" extends="cloud-default" >
+		<!-- 
+		<interceptors>
+			<interceptor name="monitoring" class="net.bull.javamelody.StrutsInterceptor"/>
+		</interceptors>  -->
+		<global-results>
+			<result name="error" >/error.html</result>
+			<result name="notfind" >/404.html</result>  
+		</global-results>
+		<!--<global-exception-mappings>
+		<exception-mapping result="notfind" exception="com.cloud.poten.exception.NotFoundException"></exception-mapping>
+		 <exception-mapping result="error" exception="Exception"></exception-mapping>  
+		</global-exception-mappings>  	-->
+	</package>
+	<include file="config/cloud-struts.xml"></include>
+	<include file="config/system-base-struts.xml"></include>
+	<include file="config/system-struts.xml"></include>
+	<include file="config/system-tools-struts.xml"></include>
+	<include file="config/scheduler-struts.xml"></include>
+	<include file="config/frontend-struts.xml"></include>
+	<!--2016-4-25 23:57:15 <include file="config/cms-struts.xml"></include> -->
+	<!--2016-4-25 23:57:15 <include file="config/cms-frontend-struts.xml"></include> 
+	-->
+	<include file="config/demo-struts.xml"></include>
+	<include file="config/message-struts.xml"></include>
+	<!-- 网站管理 -->
+	<include file="config/private-struts.xml"></include>
+	<!--2016-4-25 23:57:15 <include file="config/weixin-struts.xml"></include>
+	<include file="config/weixin-frontend-struts.xml"></include>
+	<include file="config/ad-struts.xml"></include>
+	<include file="config/ad-frontend-struts.xml"></include> 
+	<include file="config/online-struts.xml"></include>
+	<include file="config/online-frontend-struts.xml"></include>
+	<include file="config/sso-struts.xml"></include>-->
+</struts>

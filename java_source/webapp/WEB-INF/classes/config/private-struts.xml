@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="vote" extends="systemManager" namespace="/vote">
+		<!-- 数据字典-->
+		<action name="wmsDic_*" method="{1}" class="wms.WmsDictionaryAction">
+		</action>
+		
+		<action name="voteActivity_*" method="{1}" class="vote.VoteActivityAction">
+			<result>/WEB-INF/jsp/vote/voteActivity.jsp</result>
+		</action>
+	</package>
+	
+</struts>

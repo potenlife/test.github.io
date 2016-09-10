@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cloud>
+    
+    <include file="config/private-cloud.xml" />
+	<!-- 2016-4-26 12:31:56 yzj 注释
+	<include file="config/cms-cloud.xml" />
+	<include file="config/cms-template-cloud.xml" />
+	<include file="config/cms-auxiliary-cloud.xml" />
+	<include file="config/cms-access-cloud.xml" />
+	<include file="config/weixin-cloud.xml" />
+	<include file="config/online-cloud.xml" />
+	<include file="config/sso-cloud.xml" />
+	<include file="config/ad-cloud.xml" /> -->
+	<include file="config/system-cloud.xml" />
+	<!-- 
+	<include file="config/message-cloud.xml" />
+	-->
+	<include file="config/system-tools-cloud.xml" />
+	<include file="config/scheduler-cloud.xml" />
+	<!-- 2016-4-26 12:31:56 yzj 注释 <include file="config/demo-cloud.xml" /> -->
+	<include file="config/demo-cloud.xml" />
+	<!-- 通用功能设置 -->
+	<functions>
+		<function id="find" name="查询" />
+		<function id="add" name="新增" />
+		<function id="update" name="修改" />
+		<function id="del" name="删除" />
+		<function id="exp" name="导出" />
+	</functions>
+</cloud>

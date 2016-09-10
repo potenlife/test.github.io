@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+<description><![CDATA["Cloud Frame 标签集，部分标签需要CloudSystem支持。"]]></description>
+<display-name>"Cloud Tags"</display-name>
+<tlib-version>2.2</tlib-version>
+<short-name>c</short-name>
+<uri>/cloud-tags</uri>
+<tag>
+  <name>text</name>
+  <tag-class>com.cloud.poten.web.tags.TextTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+    <name>key</name>
+    <required>true</required>
+    <rtexprvalue>false</rtexprvalue>
+  </attribute>
+</tag>
+
+<tag>
+  <name>resources</name>
+  <tag-class>com.cloud.poten.web.tags.ResourcesTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+    <name>key</name>
+    <required>true</required>
+    <rtexprvalue>false</rtexprvalue>
+  </attribute>
+  <attribute>
+    <name>file</name>
+    <required>false</required>
+    <rtexprvalue>false</rtexprvalue>
+  </attribute>
+</tag>
+
+<tag>
+  <name>DBtext</name>
+  <tag-class>com.cloud.poten.web.tags.DBTextTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+    <name>key</name>
+    <required>true</required>
+    <rtexprvalue>false</rtexprvalue>
+  </attribute>
+</tag>
+
+<tag>
+  <name>csrf</name>
+  <tag-class>com.cloud.poten.web.tags.CSRFTokenTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+		<name>type</name>
+		<required>false</required>
+		<rtexprvalue>false</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+  <name>privlege</name>
+  <tag-class>com.cloud.poten.system.tag.PrivlegeTag</tag-class>
+  <body-content>scriptless</body-content>
+  <attribute>
+		<name>key</name>
+		<required>true</required>
+		<rtexprvalue>false</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+  <name>role</name>
+  <tag-class>com.cloud.poten.system.tag.RoleTag</tag-class>
+  <body-content>scriptless</body-content>
+  <attribute>
+		<name>key</name>
+		<required>true</required>
+		<rtexprvalue>false</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+  <name>is</name>
+  <tag-class>com.cloud.poten.system.tag.IsTag</tag-class>
+  <body-content>scriptless</body-content>
+  <attribute>
+		<name>key</name>
+		<required>true</required>
+		<rtexprvalue>false</rtexprvalue>
+	</attribute>
+	<attribute>
+	    <name>file</name>
+	    <required>false</required>
+	    <rtexprvalue>false</rtexprvalue>
+	  </attribute>
+	  <attribute>
+	    <name>val</name>
+	    <required>false</required>
+	    <rtexprvalue>false</rtexprvalue>
+	  </attribute>
+</tag>
+
+<tag>
+  <name>navi</name>
+  <tag-class>com.cloud.poten.system.tag.NavigationTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+    <name>key</name>
+    <required>false</required>
+    <rtexprvalue>false</rtexprvalue>
+  </attribute>
+  <attribute>
+    <name>content</name>
+    <required>false</required>
+    <rtexprvalue>false</rtexprvalue>
+  </attribute>
+</tag>
+
+<tag>
+  <name>mi</name>
+  <tag-class>com.cloud.poten.system.tag.MenuInfoTag</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+    <name>key</name>
+    <required>false</required>
+    <rtexprvalue>false</rtexprvalue>
+  </attribute>
+</tag>
+</taglib>

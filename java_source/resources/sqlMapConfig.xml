@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>     
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 是否启用缓存 -->
+		<setting name="cacheEnabled" value="true"/>
+		<!-- 当为NULL，执行Map的put方法 -->
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+	
+	<!--给实体类起别名 -->
+	<typeAliases>
+		<package name="com.cloud.poten.system.bean"/>
+		<package name="com.cloud.poten.system.tools.bean"/>
+		<!-- 2016-4-26 16:07:49 yzj <package name="com.cloud.poten.cms.bean"/> -->
+		<package name="com.cloud.poten.message.bean"/>
+		<package name="com.cloud.poten.scheduler.bean"/>
+		<!-- 2016-4-26 16:07:49 yzj  
+		<package name="com.cloud.poten.online.bean"/>
+		<package name="com.cloud.poten.ad.bean"/> -->
+		<package name="com.cloud.poten.cloud.bean"/>
+		<!-- 2016-4-26 16:07:49 yzj 
+		 <package name="com.cloud.poten.sso.bean"/>
+		<package name="com.cloud.poten.www.weixin.bean"/> -->
+		<package name="com.cloud.poten.vote.bean"/>
+	</typeAliases>
+	<!-- 
+	<plugins>
+		<plugin interceptor="com.cloud.poten.mybatis.EncryptFieldInterceptor"></plugin>
+	</plugins>
+	
+	<typeHandlers>  
+   	 	<typeHandler javaType="String" jdbcType="CLOB" handler=""/>  
+	</typeHandlers>  -->
+</configuration>    

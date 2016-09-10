@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0">
+  <display-name>Cloud Frame</display-name>
+   <!-- 设置session失效，单位分 ,3600分等于6个小时 -->
+	 <session-config>
+	  <session-timeout>3600</session-timeout>
+	 </session-config>
+  <!-- 
+  <error-page>
+      <error-code>500</error-code>
+      <location>/error.html</location>
+  </error-page>
+  <error-page>
+      <error-code>404</error-code>
+      <location>/404.html</location>
+  </error-page> -->
+  
+  <welcome-file-list>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Spring配置文件的Schema信息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	    http://www.springframework.org/schema/tx
+	    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	    http://www.springframework.org/schema/aop 
+	    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	    http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+		default-lazy-init="true">
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	
+	<!--配置数据源JDBC 库-->
+	<bean id="mydatasource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${db.driver}</value>
+		</property>
+		<property name="url">
+			<value>${db.url}</value>
+		</property>
+		<property name="username">
+			<value>${db.username}</value>
+		</property>
+		<property name="password">
+			<value>${db.password}</value>
+		</property>
+		<property name="maxActive"><!--连接池的最大数据库连接数。设为0表示无限制。 -->
+			<value>100</value>
+		</property>
+		<property name="maxIdle"><!--maxIdle是最大的空闲连接数，表示即使没有数据库连接时依然可以保持空闲的连接，而不被清除，随时处于待命状态。 -->
+			<value>10</value>
+		</property>
+		<property name="maxWait"><!--最大建立连接等待时间。如果超过此时间将接到异常 -->
+			<value>10000</value>
+		</property>
+		<!--property name="defaultAutoCommit"> <value>true</value> </property -->
+
+	</bean>
+	
+	<bean id="readDatasource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${db.driver}</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3307/cloud</value>
+		</property>
+		<property name="username">
+			<value>${db.username}</value>
+		</property>
+		<property name="password">
+			<value>${db.password}</value>
+		</property>
+		<property name="maxActive"><!--连接池的最大数据库连接数。设为0表示无限制。 -->
+			<value>100</value>
+		</property>
+		<property name="maxIdle"><!--maxIdle是最大的空闲连接数，表示即使没有数据库连接时依然可以保持空闲的连接，而不被清除，随时处于待命状态。 -->
+			<value>10</value>
+		</property>
+		<property name="maxWait"><!--最大建立连接等待时间。如果超过此时间将接到异常 -->
+			<value>10000</value>
+		</property>
+		<!--property name="defaultAutoCommit"> <value>true</value> </property -->
+	</bean>
+	
+	<bean id="readWriteDataSource" class="com.cloud.poten.datasource.ReadWriteDataSource">  
+	    <property name="writeDataSource" ref="mydatasource"/>  
+	    <property name="readDataSourceMap">  
+	       <map>  
+	          <entry key="readDataSource1" value-ref="readDatasource"/>  
+	       </map>  
+	    </property>  
+	</bean>
+	
+	
+	<bean id="sqlSessionFactory" class="com.cloud.poten.mybatis.SqlSessionFactoryBean">
+		<property name="dataSource" ref="readWriteDataSource" />
+		<property name="configLocation" value="classpath:sqlMapConfig.xml" />
+	</bean>
+	
+	
+		
+	<!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="readWriteDataSource"></property>
+	</bean>
+	
+	<bean id="readWriteDataSourceTransactionProcessor" class="com.cloud.poten.datasource.ReadWriteDataSourceProcessor">  
+	   <property name="forceChoiceReadWhenWrite" value="false"/>  
+	</bean> 
+
+	<aop:config>
+		<!-- 所有cloud子包下的service包下的公共方法 -->
+		<aop:pointcut id="allManagerMethod"
+			expression="execution (public * com.cloud..service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod" />
+		
+		<!-- 通过AOP切面实现读/写库选择 -->  
+		<aop:aspect order="-2147483648" ref="readWriteDataSourceTransactionProcessor">  
+		   <aop:around pointcut-ref="allManagerMethod" method="determineReadOrWriteDB"/>   
+		</aop:aspect>
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="modify*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="copy*" propagation="REQUIRED"/>
+			<tx:method name="move*" propagation="REQUIRED"/>
+			
+			<tx:method name="*" propagation="SUPPORTS"  read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<import resource="classpath*:config/spring-execption.xml" />
+	
+	<import resource="classpath*:config/spring-freemarker.xml" />
+	<!-- 
+	<import resource="classpath*:config/spring-time.xml" />
+	 -->
+	 
+	 <!-- 注册初始 -->
+	<bean id="InitRegeditService"	class="com.cloud.poten.service.InitRegeditServiceImpl"> 
+		<property name="regedits">
+			<list>
+				<ref bean="quartzSchedulerRegeditServiceImpl"/>
+				<!-- <ref bean="systemRegeditServiceImpl"/>  -->
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="systemRegeditServiceImpl" class="com.cloud.poten.system.service.impl.SystemRegeditServiceImpl"/>
+	<!-- 任务管理 -->
+	<bean id="SchedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+	<bean id="quartzSchedulerRegeditServiceImpl"	class="com.cloud.poten.scheduler.service.impl.QuartzSchedulerRegeditServiceImpl" /> 
+	 
+	<!-- 自动装载 -->
+	<context:component-scan base-package="com.cloud.poten" />
+
+</beans>
